@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.10.11 on win32)" generated="2026-03-09T22:13:24.273626" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\sachi\OneDrive\Documents\Projects\Web Link Checker\test.robot">
+<test id="s1-t1" name="Get All Links From Webpage" line="7">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-03-09T22:13:24.516468" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x00000256A444A6B0&gt;</msg>
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-03-09T22:13:24.514420" elapsed="0.003074"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2026-03-09T22:13:24.517494" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-gpu</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2026-03-09T22:13:24.517494" elapsed="0.000000"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:24.517494" level="INFO">Opening browser 'Chrome' to base url 'file:///C:/Users/sachi/OneDrive/Documents/Projects/Web Link Checker/test.html'.</msg>
+<arg>file:///C:/Users/sachi/OneDrive/Documents/Projects/Web Link Checker/test.html</arg>
+<arg>Chrome</arg>
+<arg>options=${options}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-03-09T22:13:24.517494" elapsed="1.150723"/>
+</kw>
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.679656" level="INFO">${elements} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.2")&gt;, &lt;selenium.webdrive...</msg>
+<var>${elements}</var>
+<arg>xpath=//a[@href]</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.669522" elapsed="0.010134"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-09T22:13:25.680655" level="INFO">${links} = []</msg>
+<var>${links}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.680655" elapsed="0.000000"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.687379" level="INFO">${href} = https://www.google.com/</msg>
+<var>${href}</var>
+<arg>${element}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.681653" elapsed="0.005726"/>
+</kw>
+<if>
+<branch type="IF" condition="'${href}'.startswith('http')">
+<kw name="Append To List" owner="Collections">
+<arg>${links}</arg>
+<arg>${href}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.688431" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:25.687379" elapsed="0.001052"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:25.687379" elapsed="0.001052"/>
+</if>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.2")&gt;</var>
+<status status="PASS" start="2026-03-09T22:13:25.680655" elapsed="0.007776"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.693938" level="INFO">${href} = https://github.com/</msg>
+<var>${href}</var>
+<arg>${element}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.688431" elapsed="0.005507"/>
+</kw>
+<if>
+<branch type="IF" condition="'${href}'.startswith('http')">
+<kw name="Append To List" owner="Collections">
+<arg>${links}</arg>
+<arg>${href}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.693938" elapsed="0.000998"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:25.693938" elapsed="0.000998"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:25.693938" elapsed="0.000998"/>
+</if>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.3")&gt;</var>
+<status status="PASS" start="2026-03-09T22:13:25.688431" elapsed="0.006505"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.699192" level="INFO">${href} = https://this-domain-definitely-does-not-exist-12345.com/</msg>
+<var>${href}</var>
+<arg>${element}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.694936" elapsed="0.004256"/>
+</kw>
+<if>
+<branch type="IF" condition="'${href}'.startswith('http')">
+<kw name="Append To List" owner="Collections">
+<arg>${links}</arg>
+<arg>${href}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.699192" elapsed="0.000998"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:25.699192" elapsed="0.000998"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:25.699192" elapsed="0.000998"/>
+</if>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.4")&gt;</var>
+<status status="PASS" start="2026-03-09T22:13:25.694936" elapsed="0.005254"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.703466" level="INFO">${href} = https://www.google.com/this-page-does-not-exist-404</msg>
+<var>${href}</var>
+<arg>${element}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.700190" elapsed="0.003276"/>
+</kw>
+<if>
+<branch type="IF" condition="'${href}'.startswith('http')">
+<kw name="Append To List" owner="Collections">
+<arg>${links}</arg>
+<arg>${href}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.704870" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:25.704870" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:25.704870" elapsed="0.000000"/>
+</if>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.5")&gt;</var>
+<status status="PASS" start="2026-03-09T22:13:25.700190" elapsed="0.004680"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.708697" level="INFO">${href} = https://httpstat.us/404</msg>
+<var>${href}</var>
+<arg>${element}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.704870" elapsed="0.003827"/>
+</kw>
+<if>
+<branch type="IF" condition="'${href}'.startswith('http')">
+<kw name="Append To List" owner="Collections">
+<arg>${links}</arg>
+<arg>${href}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.709723" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:25.708697" elapsed="0.001026"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:25.708697" elapsed="0.001026"/>
+</if>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.6")&gt;</var>
+<status status="PASS" start="2026-03-09T22:13:25.704870" elapsed="0.004853"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-03-09T22:13:25.714275" level="INFO">${href} = https://httpstat.us/500</msg>
+<var>${href}</var>
+<arg>${element}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.709723" elapsed="0.004552"/>
+</kw>
+<if>
+<branch type="IF" condition="'${href}'.startswith('http')">
+<kw name="Append To List" owner="Collections">
+<arg>${links}</arg>
+<arg>${href}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.714275" elapsed="0.001049"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:25.714275" elapsed="0.001049"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:25.714275" elapsed="0.001049"/>
+</if>
+<var name="${element}">&lt;selenium.webdriver.remote.webelement.WebElement (session="87ac38ec1962b097a30f16088c1432eb", element="f.9CE018B2375F4B9C9F4CE4D98F29643A.d.98632A8CD9104D8E988D16A3B6D094B0.e.7")&gt;</var>
+<status status="PASS" start="2026-03-09T22:13:25.709723" elapsed="0.005601"/>
+</iter>
+<var>${element}</var>
+<value>@{elements}</value>
+<status status="PASS" start="2026-03-09T22:13:25.680655" elapsed="0.034669"/>
+</for>
+<kw name="Remove Duplicates" owner="Collections">
+<msg time="2026-03-09T22:13:25.715324" level="INFO">0 duplicates removed.</msg>
+<msg time="2026-03-09T22:13:25.715324" level="INFO">${links} = ['https://www.google.com/', 'https://github.com/', 'https://this-domain-definitely-does-not-exist-12345.com/', 'https://www.google.com/this-page-does-not-exist-404', 'https://httpstat.us/404', 'https:...</msg>
+<var>${links}</var>
+<arg>${links}</arg>
+<doc>Returns a list without duplicates based on the given ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.715324" elapsed="0.000000"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-09T22:13:25.715324" level="INFO">${broken_links} = []</msg>
+<var>${broken_links}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.715324" elapsed="0.000000"/>
+</kw>
+<kw name="Get Library Instance" owner="BuiltIn">
+<msg time="2026-03-09T22:13:25.716746" level="INFO">${seleniumlib} = &lt;SeleniumLibrary.SeleniumLibrary object at 0x00000256A4346E00&gt;</msg>
+<var>${seleniumlib}</var>
+<arg>SeleniumLibrary</arg>
+<doc>Returns the currently active instance of the specified library.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.716746" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-09T22:13:25.716746" level="INFO">${driver} = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session="87ac38ec1962b097a30f16088c1432eb")&gt;</msg>
+<var>${driver}</var>
+<arg>${seleniumlib.driver}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-09T22:13:25.716746" elapsed="0.001435"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Is Broken Link" owner="LinkChecker">
+<msg time="2026-03-09T22:13:27.958282" level="INFO">${is_broken} = False</msg>
+<var>${is_broken}</var>
+<arg>${link}</arg>
+<arg>${driver}</arg>
+<status status="PASS" start="2026-03-09T22:13:25.718181" elapsed="2.240101"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_broken}">
+<kw name="Append To List" owner="Collections">
+<arg>${broken_links}</arg>
+<arg>${link}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2026-03-09T22:13:27.959788" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-03-09T22:13:27.959788" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:27.959788" elapsed="0.000000"/>
+</if>
+<var name="${link}">https://www.google.com/</var>
+<status status="PASS" start="2026-03-09T22:13:25.718181" elapsed="2.241607"/>
+</iter>
+<iter>
+<kw name="Is Broken Link" owner="LinkChecker">
+<msg time="2026-03-09T22:13:29.342696" level="INFO">${is_broken} = False</msg>
+<var>${is_broken}</var>
+<arg>${link}</arg>
+<arg>${driver}</arg>
+<status status="PASS" start="2026-03-09T22:13:27.959788" elapsed="1.382908"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_broken}">
+<kw name="Append To List" owner="Collections">
+<arg>${broken_links}</arg>
+<arg>${link}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2026-03-09T22:13:29.342696" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-03-09T22:13:29.342696" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:29.342696" elapsed="0.000504"/>
+</if>
+<var name="${link}">https://github.com/</var>
+<status status="PASS" start="2026-03-09T22:13:27.959788" elapsed="1.383412"/>
+</iter>
+<iter>
+<kw name="Is Broken Link" owner="LinkChecker">
+<msg time="2026-03-09T22:13:29.503152" level="INFO">${is_broken} = True</msg>
+<var>${is_broken}</var>
+<arg>${link}</arg>
+<arg>${driver}</arg>
+<status status="PASS" start="2026-03-09T22:13:29.343200" elapsed="0.159952"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_broken}">
+<kw name="Append To List" owner="Collections">
+<arg>${broken_links}</arg>
+<arg>${link}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:29.503152" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:29.503152" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:29.503152" elapsed="0.001000"/>
+</if>
+<var name="${link}">https://this-domain-definitely-does-not-exist-12345.com/</var>
+<status status="PASS" start="2026-03-09T22:13:29.343200" elapsed="0.160952"/>
+</iter>
+<iter>
+<kw name="Is Broken Link" owner="LinkChecker">
+<msg time="2026-03-09T22:13:29.678316" level="INFO">${is_broken} = True</msg>
+<var>${is_broken}</var>
+<arg>${link}</arg>
+<arg>${driver}</arg>
+<status status="PASS" start="2026-03-09T22:13:29.504152" elapsed="0.174164"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_broken}">
+<kw name="Append To List" owner="Collections">
+<arg>${broken_links}</arg>
+<arg>${link}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:29.678316" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:29.678316" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:29.678316" elapsed="0.000000"/>
+</if>
+<var name="${link}">https://www.google.com/this-page-does-not-exist-404</var>
+<status status="PASS" start="2026-03-09T22:13:29.504152" elapsed="0.174164"/>
+</iter>
+<iter>
+<kw name="Is Broken Link" owner="LinkChecker">
+<msg time="2026-03-09T22:13:33.850184" level="INFO">${is_broken} = True</msg>
+<var>${is_broken}</var>
+<arg>${link}</arg>
+<arg>${driver}</arg>
+<status status="PASS" start="2026-03-09T22:13:29.679511" elapsed="4.170673"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_broken}">
+<kw name="Append To List" owner="Collections">
+<arg>${broken_links}</arg>
+<arg>${link}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:33.850184" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:33.850184" elapsed="0.001009"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:33.850184" elapsed="0.001009"/>
+</if>
+<var name="${link}">https://httpstat.us/404</var>
+<status status="PASS" start="2026-03-09T22:13:29.678316" elapsed="4.172877"/>
+</iter>
+<iter>
+<kw name="Is Broken Link" owner="LinkChecker">
+<msg time="2026-03-09T22:13:36.132822" level="INFO">${is_broken} = True</msg>
+<var>${is_broken}</var>
+<arg>${link}</arg>
+<arg>${driver}</arg>
+<status status="PASS" start="2026-03-09T22:13:33.851193" elapsed="2.281629"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_broken}">
+<kw name="Append To List" owner="Collections">
+<arg>${broken_links}</arg>
+<arg>${link}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-03-09T22:13:36.132822" elapsed="0.000999"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:36.132822" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2026-03-09T22:13:36.132822" elapsed="0.000999"/>
+</if>
+<var name="${link}">https://httpstat.us/500</var>
+<status status="PASS" start="2026-03-09T22:13:33.851193" elapsed="2.282628"/>
+</iter>
+<var>${link}</var>
+<value>@{links}</value>
+<status status="PASS" start="2026-03-09T22:13:25.718181" elapsed="10.415640"/>
+</for>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-03-09T22:13:36.133821" elapsed="2.108816"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-09T22:13:38.243719" level="INFO">Total links checked: 6</msg>
+<arg>Total links checked: ${links.__len__()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-09T22:13:38.243719" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-09T22:13:38.243719" level="INFO">Broken links: ['https://this-domain-definitely-does-not-exist-12345.com/', 'https://www.google.com/this-page-does-not-exist-404', 'https://httpstat.us/404', 'https://httpstat.us/500']</msg>
+<arg>Broken links: ${broken_links}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-09T22:13:38.243719" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-09T22:13:38.243719" level="INFO">Total broken links: 4</msg>
+<arg>Total broken links: ${broken_links.__len__()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-09T22:13:38.243719" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-03-09T22:13:24.513906" elapsed="13.729813"/>
+</test>
+<status status="PASS" start="2026-03-09T22:13:24.273626" elapsed="13.970093"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="1" fail="0" skip="0">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
