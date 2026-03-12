@@ -20,8 +20,8 @@ Check Links On Page
     END
 
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-    #Call Method    ${options}    add_argument    --headless
-    #Call Method    ${options}    add_argument    --disable-gpu
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --disable-gpu
     Open Browser    ${url}    Chrome    options=${options}
     ${elements}=    Get WebElements    xpath=//a[@href]
     ${links}=    Create List
