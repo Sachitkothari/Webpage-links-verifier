@@ -3,13 +3,26 @@ Library    SeleniumLibrary
 Library    Collections
 Library    LinkChecker.py
 
+*** Variables ***
+${URL}    ${EMPTY}
+
 *** Test Cases ***
 Get All Links From Webpage
+    Check Links On Page    ${URL}
+
+*** Keywords ***
+Check Links On Page
+    [Arguments]    ${url}
+    ${is_valid}=    Evaluate    isinstance($url, str) and $url.startswith('http')
+    IF    not ${is_valid}
+        Log    "${url}" is not a valid URL. Please provide a URL starting with http:// or https://    console=True
+        RETURN
+    END
+
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-    Call Method    ${options}    add_argument    --headless
-    Call Method    ${options}    add_argument    --disable-gpu
-    Open Browser    file:///C:/Users/sachi/OneDrive/Documents/Projects/Web Link Checker/test.html   Chrome    options=${options}
-    #Open Browser    file:///C:/Users/sachi/OneDrive/Documents/Projects/Web Link Checker/test.html    Chrome
+    #Call Method    ${options}    add_argument    --headless
+    #Call Method    ${options}    add_argument    --disable-gpu
+    Open Browser    ${url}    Chrome    options=${options}
     ${elements}=    Get WebElements    xpath=//a[@href]
     ${links}=    Create List
     FOR    ${element}    IN    @{elements}
@@ -31,6 +44,6 @@ Get All Links From Webpage
     END
     Close Browser
 
-    Log    Total links checked: ${links.__len__()}
-    Log    Broken links: ${broken_links}
-    Log    Total broken links: ${broken_links.__len__()}
+    Log    Total links checked: ${links.__len__()}    console=True
+    Log    Broken links: ${broken_links}    console=True
+    Log    Total broken links: ${broken_links.__len__()}    console=True
