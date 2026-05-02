@@ -1,20 +1,57 @@
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, WebDriverException
 
-def is_broken_link(url, driver):
+def is_broken_link(url, driver, timeout=10):
+    """
+    Check if a URL is a broken link by attempting to load it.
+    
+    Args:
+        url: The URL to check
+        driver: Selenium WebDriver instance
+        timeout: Maximum time to wait for page load (seconds)
+        
+    Returns:
+        bool: True if link is broken, False otherwise
+    """
+    original_window = driver.current_window_handle
+    new_window = None
+    
     try:
-        original_window = driver.current_window_handle
+        # Open new tab
         driver.execute_script("window.open('');")
-        driver.switch_to.window(driver.window_handles[-1])
+        new_window = driver.window_handles[-1]
+        driver.switch_to.window(new_window)
+        
+        # Set page load timeout
+        driver.set_page_load_timeout(timeout)
         driver.get(url)
         
-        # 404/error pages don't have a standard signal, so check title
+        # Check for error indicators
         title = driver.title.lower()
-        is_broken = any(word in title for word in ['404', 'not found', 'error', 'page not found'])
+        page_source = driver.page_source.lower()
         
-        driver.close()
-        driver.switch_to.window(original_window)
+        error_indicators = ['404', 'not found', 'error', 'page not found', 'forbidden']
+        
+        is_broken = (
+            any(indicator in title for indicator in error_indicators) or
+            any(indicator in page_source[:500] for indicator in error_indicators)  # Check first 500 chars
+        )
+        
         return is_broken
-    except Exception:
+        
+    except TimeoutException:
+        # Timeout likely means broken/slow link
         return True
+    except WebDriverException as e:
+        # Log specific WebDriver issues instead of silently failing
+        print(f"WebDriver error checking {url}: {e}")
+        return True
+    except Exception as e:
+        # Unexpected errors should be visible
+        print(f"Unexpected error checking {url}: {e}")
+        return True
+    finally:
+        # Always cleanup, even if errors occur
+        if new_window and new_window in driver.window_handles:
+            driver.switch_to.window(new_window)
+            driver.close()
+        driver.switch_to.window(original_window)
